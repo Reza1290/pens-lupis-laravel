@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
-use App\Models\DetailUser;
+use App\Models\DetailMahasiswa;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class DetailUserController extends Controller
+class DetailMahasiswaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,7 +35,7 @@ class DetailUserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(DetailUser $detailUser)
+    public function show(DetailMahasiswa $detailUser)
     {
         //
     }
@@ -43,7 +43,7 @@ class DetailUserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(DetailUser $detailUser)
+    public function edit(DetailMahasiswa $detailUser)
     {
         //
     }
@@ -51,7 +51,7 @@ class DetailUserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, DetailUser $detailUser)
+    public function update(Request $request, DetailMahasiswa $detailUser)
     {
         //
     }
@@ -59,7 +59,7 @@ class DetailUserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(DetailUser $detailUser)
+    public function destroy(DetailMahasiswa $detailUser)
     {
         //
     }

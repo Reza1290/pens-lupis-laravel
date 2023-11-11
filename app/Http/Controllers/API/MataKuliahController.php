@@ -31,6 +31,23 @@ class MataKuliahController extends Controller
         ],200);
     }
 
+
+    // public function indexDosen(Request $request){
+    //     $mataKuliah = MataKuliah::with();
+
+    //     if (empty($mataKuliah)) {
+    //         return response()->json([
+    //             'status' => false,
+    //             'message' => 'MataKuliah not found'
+    //         ], 404);
+    //     }
+
+    //     return response()->json([
+    //         'status' => true,
+    //         'data' => $mataKuliah
+    //     ]);
+    // }
+
     /**
      * Show the form for creating a new resource.
      */

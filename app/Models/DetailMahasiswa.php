@@ -10,5 +10,7 @@ class DetailMahasiswa extends Model
     use HasFactory;
     protected $guarded = ['id'];
 
-    
+    public function mahasiswa(){
+        return $this->belongsTo(User::class,'users_id');
+    }
 }

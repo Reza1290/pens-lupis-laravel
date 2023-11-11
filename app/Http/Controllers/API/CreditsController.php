@@ -10,7 +10,7 @@ class CreditsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth.roles:admin');
+        $this->middleware('auth.roles:admin')->except('index','indexDosen','indexWali');
     }
 
     /**
@@ -18,7 +18,7 @@ class CreditsController extends Controller
      */
     public function index()
     {
-        $credits = Credits::all();
+        $credits = Credits::with('kelas','dosen','matkul')->get();
 
         if(!$credits->isNotEmpty()){
             return response()->json([
@@ -30,6 +30,43 @@ class CreditsController extends Controller
             'status' => true,
             'data' => $credits
         ],200);
+    }
+
+    public function indexDosen(Request $request){
+        $credits = Credits::with('kelas','dosen','matkul')->where('dosen_id',$request->dosen_id)->get();
+        
+        if ($credits->count() === 0) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Credits not found'
+            ], 404);
+        }
+
+        return response()->json([
+            'status' => true,
+            'data' => $credits
+        ]);
+    }
+
+    public function indexWali(Request $request){
+        $credits = Credits::with(['kelas.wali', 'dosen', 'matkul'])
+    ->whereHas('kelas.wali', function ($query) use ($request) {
+        $query->where('id', $request->dosen_id);
+    })
+    ->get();
+
+        
+        if ($credits->count() === 0) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Credits not found'
+            ], 404);
+        }
+
+        return response()->json([
+            'status' => true,
+            'data' => $credits
+        ]);
     }
 
     /**
@@ -67,10 +104,10 @@ class CreditsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $id)
     {
-        $credits = Credits::find($id);
-
+        $credits = Credits::with('kelas','dosen','matkul')->where('id',$id)->get();
+        
         if (empty($credits)) {
             return response()->json([
                 'status' => false,

@@ -10,4 +10,8 @@ class DetailDosen extends Model
     use HasFactory;
     protected $guarded = ['id'];
 
+    public function dosen(){
+        return $this->belongsTo(User::class,'users_id');
+    }
+
 }

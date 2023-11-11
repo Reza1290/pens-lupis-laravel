@@ -39,7 +39,10 @@ class AuthRolesMiddleware
         
         // $user = $request->user();
 
-        if ($user && in_array($user->roles, $roles)) {
+        $userRoles = explode(',', isset($user->roles) ? $user->roles : '');
+
+
+        if ($user && !empty(array_intersect($userRoles, $roles))){
             return $next($request);
         }
     
